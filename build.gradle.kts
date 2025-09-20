@@ -2,4 +2,24 @@
 plugins {
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.kotlin.android) apply false
+    alias(libs.plugins.org.jetbrains.kotlin.kapt) apply false
+
+}
+
+buildscript {
+    repositories {
+        google()
+//        jcenter()
+        maven {
+            url = uri("https://maven.fabric.io/public")
+        }
+        mavenCentral()
+    }
+    dependencies {
+        classpath (libs.android.gradle.plugin)
+        classpath (libs.kotlin.gradle.plugin)
+        classpath (libs.google.services)
+        classpath(libs.firebase.crashlytics.gradle)
+    }
+
 }

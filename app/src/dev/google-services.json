@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "859594009705",
+    "project_id": "recipeapp-d114d",
+    "storage_bucket": "recipeapp-d114d.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:859594009705:android:e0630939e0c94d78d306f8",
+        "android_client_info": {
+          "package_name": "com.tugbaolcer.recipeapp.test"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAHWhfGcicZgMzj80tZG-NHDqZCYRTl_zU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
