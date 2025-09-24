@@ -1,7 +1,9 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.org.jetbrains.kotlin.kapt)
+    alias(libs.plugins.hilt.android)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.safeargs)
     id ("kotlin-parcelize")
     id ("com.google.firebase.crashlytics")
     id ("com.google.gms.google-services")
@@ -48,7 +50,7 @@ android {
             applicationId = "com.tugbaolcer.recipeapp"
             applicationIdSuffix = ".test"
             resValue ("string", "app_name", "RecipeApp ${version_name}-test")
-            buildConfigField ("String", "ENDPOINT", "\"https://www.themealdb.com\"")
+            buildConfigField ("String", "ENDPOINT", "\"https://www.themealdb.com/api/json/v1/1\"")
             versionNameSuffix = "-test"
         }
 
@@ -56,7 +58,7 @@ android {
             applicationId = "com.tugbaolcer.recipeapp"
             applicationIdSuffix = ".prod"
             resValue ("string", "app_name", "RecipeApp ${version_name}-prod")
-            buildConfigField ("String", "ENDPOINT", "\"https://www.themealdb.com\"")
+            buildConfigField ("String", "ENDPOINT", "\"https://www.themealdb.com/api/json/v1/1\"")
             versionNameSuffix = "-prod"
         }
     }
@@ -71,16 +73,12 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
+
     kotlinOptions {
         freeCompilerArgs = listOf("-Xjvm-default=all")
     }
-    kapt {
-        correctErrorTypes = true
-    }
-    ndkVersion = "21.1.6352462"
 
     buildFeatures {
-        buildConfig = true
         dataBinding = true
     }
 }
@@ -100,17 +98,13 @@ dependencies {
     implementation(libs.lifecycle.livedata)
     implementation(libs.lifecycle.runtime)
 
-    //Dagger
-    implementation(libs.dagger.android)
-    implementation(libs.dagger.android.support)
-    kapt (libs.dagger.android.processor)
-    kapt (libs.dagger.compiler)
-
+    //Hilt
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.compiler)
 
     //Networking and Data Serialization
     implementation(libs.retrofit)
     implementation(libs.gson)
-    implementation(libs.retrofit.rxjava)
     implementation(libs.retrofit.converter.moshi)
     implementation(libs.okhttp.logging)
 
