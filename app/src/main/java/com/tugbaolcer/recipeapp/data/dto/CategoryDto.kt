@@ -1,12 +1,18 @@
 package com.tugbaolcer.recipeapp.data.dto
 
-data class CategoryDto(
-    val idCategory: String,
-    val strCategory: String,
-    val strCategoryThumb: String,
-    val strCategoryDescription: String
-)
+import android.os.Parcelable
+import com.squareup.moshi.Json
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
+data class CategoryDto(
+    @field:Json(name = "idCategory") val idCategory: String,
+    @field:Json(name = "strCategory") val strCategory: String,
+    @field:Json(name = "strCategoryThumb") val strCategoryThumb: String,
+    @field:Json(name = "strCategoryDescription") val strCategoryDescription: String
+) : Parcelable
+
+@Parcelize
 data class GetCategoriesResponse(
-    val categories: List<CategoryDto>
-)
+    @field:Json(name = "categories") val categories: List<CategoryDto>
+) : Parcelable

@@ -50,7 +50,7 @@ android {
             applicationId = "com.tugbaolcer.recipeapp"
             applicationIdSuffix = ".test"
             resValue ("string", "app_name", "RecipeApp ${version_name}-test")
-            buildConfigField ("String", "ENDPOINT", "\"https://www.themealdb.com/api/json/v1/1\"")
+            buildConfigField ("String", "ENDPOINT", "\"https://www.themealdb.com/api/json/v1/1/\"")
             versionNameSuffix = "-test"
         }
 
@@ -58,7 +58,7 @@ android {
             applicationId = "com.tugbaolcer.recipeapp"
             applicationIdSuffix = ".prod"
             resValue ("string", "app_name", "RecipeApp ${version_name}-prod")
-            buildConfigField ("String", "ENDPOINT", "\"https://www.themealdb.com/api/json/v1/1\"")
+            buildConfigField ("String", "ENDPOINT", "\"https://www.themealdb.com/api/json/v1/1/\"")
             versionNameSuffix = "-prod"
         }
     }
@@ -75,10 +75,12 @@ android {
     }
 
     kotlinOptions {
+        jvmTarget = "17"
         freeCompilerArgs = listOf("-Xjvm-default=all")
     }
 
     buildFeatures {
+        buildConfig = true
         dataBinding = true
     }
 }
@@ -107,6 +109,8 @@ dependencies {
     implementation(libs.gson)
     implementation(libs.retrofit.converter.moshi)
     implementation(libs.okhttp.logging)
+    implementation(libs.moshi.kotlin)
+    ksp(libs.moshi.kotlin.codegen)
 
     //Firebase Integration
     implementation(libs.firebase.core)
