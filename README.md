@@ -29,9 +29,13 @@ This project is built with **Clean Architecture** and follows best practices in 
 
 ## 📂 Project Structure
 RecipeApp/
+
 ├── data/ # Handles API, DTOs, repository implementations
+
 ├── domain/ # Business logic: models, repository interfaces, use cases
+
 ├── presentation/ # UI layer: ViewModels, Activities, Fragments
+
 └── di/ # Hilt modules for dependency injection
 
 
