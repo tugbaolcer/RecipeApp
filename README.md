@@ -56,7 +56,8 @@ This separation of concerns provides better testability and maintainability.
 - [Retrofit](https://square.github.io/retrofit/)  
 - [Moshi](https://github.com/square/moshi)  
 - [Firebase Authentication](https://firebase.google.com/docs/auth)  
-- [Dagger Hilt](https://dagger.dev/hilt/)  
+- [Dagger Hilt](https://dagger.dev/hilt/)
+- [DataBinding](https://developer.android.com/topic/libraries/data-binding) 
 
 ---
 
