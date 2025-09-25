@@ -12,8 +12,8 @@ This project is built with **Clean Architecture** and follows best practices in 
 - **Firebase Authentication** support
 - **Kotlin Coroutines & Flow** for asynchronous programming
 - **Retrofit + Moshi** for network layer and JSON parsing
-- **Databinding 
-
+- **DataBinding** for efficient UI binding
+  
 ---
 
 ## 🛠️ Tech Stack
