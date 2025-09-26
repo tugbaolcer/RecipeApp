@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">RecipeApp</string>
+    <string name="lorem_ipsum_short">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Faucibus viverra purus quis ornare. Viverra massa enim, auctor est. Vitae nulla lacus dui gravida blandit orci pulvinar pharetra.</string>
 </resources>

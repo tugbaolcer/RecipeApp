@@ -2,4 +2,10 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="brand_blue">#0066ad</color>
+    <color name="light_information">#f2faff</color>
+    <color name="light_error">#fff8f8</color>
+    <color name="brand_orange">#f07017</color>
+    <color name="brand_green">#25BA25</color>
+    <color name="brand_red">#C81F16</color>
 </resources>
