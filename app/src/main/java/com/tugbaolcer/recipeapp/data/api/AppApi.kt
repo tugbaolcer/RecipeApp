@@ -5,6 +5,6 @@ import retrofit2.Response
 import retrofit2.http.GET
 
 interface AppApi {
-    @GET("categories.ph")
+    @GET("categories.php")
     suspend fun getCategories(): Response<GetCategoriesResponse>
 }
