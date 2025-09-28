@@ -11,8 +11,6 @@ class MainActivity : BaseRecipeActivity<MainViewModel, ActivityMainBinding>() {
     override val layoutResourceId: Int
         get() = R.layout.activity_main
 
-//    override val viewModel: MainViewModel by viewModels()
-
     override fun init() {
         retrieveNewData()
     }

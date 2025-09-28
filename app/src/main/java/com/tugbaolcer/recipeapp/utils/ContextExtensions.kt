@@ -3,7 +3,6 @@ package com.tugbaolcer.recipeapp.utils
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -13,6 +12,7 @@ import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.tugbaolcer.recipeapp.App.Companion.mAlertDialog
 import com.tugbaolcer.recipeapp.R
 import com.tugbaolcer.recipeapp.databinding.LayoutAlertMessageBinding
+import androidx.core.graphics.drawable.toDrawable
 
 
 fun Context.showSuccessAlert(
@@ -68,7 +68,7 @@ fun Context.showBaseAlert(
             alertDialog.window?.apply {
                 attributes.verticalMargin = 0.1F
                 setGravity(Gravity.TOP)
-                setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                setBackgroundDrawable(Color.TRANSPARENT.toDrawable())
                 setDimAmount(0.1f)
             }
 

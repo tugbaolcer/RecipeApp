@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import retrofit2.HttpException
 
 sealed class UiState<out T> {
     object Loading : UiState<Nothing>()
@@ -14,7 +15,7 @@ sealed class UiState<out T> {
 
 open class BaseRecipeViewModel : ViewModel() {
 
-    private val _uiState = MutableStateFlow<UiState<Any>>(UiState.Loading)
+    protected val _uiState = MutableStateFlow<UiState<Any>>(UiState.Loading)
     val uiState: StateFlow<UiState<Any>> get() = _uiState
 
     protected fun <T> execute(
@@ -25,7 +26,17 @@ open class BaseRecipeViewModel : ViewModel() {
                 _uiState.value = UiState.Loading
                 val result = block()
                 _uiState.value = UiState.Success(result as Any)
-            } catch (e: Exception) {
+            } catch (e: HttpException) {
+                val errorMessage = when (e.code()) {
+                    400 -> "Geçersiz istek"
+                    401 -> "Yetkisiz erişim"
+                    404 -> "Veri bulunamadı"
+                    500 -> "Sunucu hatası"
+                    else -> "Bilinmeyen hata: ${e.code()}"
+                }
+                _uiState.value = UiState.Error(errorMessage)
+            }
+            catch (e: Exception) {
                 _uiState.value = UiState.Error(e.message ?: "Unknown Error")
             }
         }

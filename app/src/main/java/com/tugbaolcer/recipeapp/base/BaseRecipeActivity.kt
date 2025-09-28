@@ -1,24 +1,24 @@
 package com.tugbaolcer.recipeapp.base
 
 import android.os.Bundle
-import android.view.View
-import android.widget.ProgressBar
+import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import com.tugbaolcer.recipeapp.R
+import com.tugbaolcer.recipeapp.utils.ProgressDialog
+import com.tugbaolcer.recipeapp.utils.observeUiState
 import com.tugbaolcer.recipeapp.utils.showErrorAlert
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.StateFlow
 
 
-abstract class BaseRecipeActivity <VM: BaseRecipeViewModel, B: ViewDataBinding>(): AppCompatActivity() {
+abstract class BaseRecipeActivity<VM : BaseRecipeViewModel, B : ViewDataBinding>() :
+    AppCompatActivity() {
 
     protected abstract val layoutResourceId: Int
 
@@ -34,14 +34,14 @@ abstract class BaseRecipeActivity <VM: BaseRecipeViewModel, B: ViewDataBinding>(
     abstract fun retrieveNewData()
     abstract fun bindingData()
 
-    private var progressDialog: ProgressBar? = null
+    private var progressDialog: ProgressDialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = DataBindingUtil.setContentView(this, layoutResourceId)
 
-        progressDialog = ProgressBar(this)
+        progressDialog = ProgressDialog(this)
 
         enableEdgeToEdge()
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -50,34 +50,40 @@ abstract class BaseRecipeActivity <VM: BaseRecipeViewModel, B: ViewDataBinding>(
             insets
         }
 
-        observeUiState()
+        setupUiObserver(
+            uiState = viewModel.uiState,
+            onLoading = {
+                progressDialog?.show()
+            },
+            onSuccess = {
+                progressDialog?.dismiss()
+                Log.d("LOG_STATE", "onSuccess worked !")
+            },
+            onError = { message ->
+                progressDialog?.dismiss()
+                showErrorAlert(message = message)
+                Log.d("LOG_STATE", "onError worked !")
+            }
+        )
 
         bindingData()
         init()
 
     }
 
-    private fun observeUiState() {
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.uiState.collect { state ->
-                    when (state) {
-                        is UiState.Loading -> {
-                            progressDialog?.visibility = View.VISIBLE
-                        }
-                        is UiState.Success<*> -> {
-                            progressDialog?.visibility = View.GONE
-                            retrieveNewData()
-//                            onDataLoaded(state.data)
-                        }
-                        is UiState.Error -> {
-                            progressDialog?.visibility = View.GONE
-                            showErrorAlert(state.message)
-                        }
-                    }
-                }
-            }
-        }
+    protected fun <T> setupUiObserver(
+        uiState: StateFlow<UiState<T>>,
+        onLoading: () -> Unit,
+        onSuccess: (T) -> Unit,
+        onError: (String) -> Unit
+    ) {
+        lifecycleScope.observeUiState(
+            uiState = uiState,
+            lifecycle = lifecycle,
+            onLoading = onLoading,
+            onSuccess = onSuccess,
+            onError = onError
+        )
     }
 
 }
