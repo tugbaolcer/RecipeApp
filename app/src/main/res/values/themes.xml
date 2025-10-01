@@ -6,4 +6,35 @@
     </style>
 
     <style name="Theme.RecipeApp" parent="Base.Theme.RecipeApp" />
+
+    <style name="TabLayoutStyle" parent="Widget.MaterialComponents.TabLayout">
+        <item name="android:background">@color/black_two</item>
+        <item name="tabGravity">fill</item>
+        <item name="tabIndicatorColor">@color/transparent</item>>
+        <item name="tabInlineLabel">true</item>
+        <item name="tabSelectedTextColor">@color/white</item>
+        <item name="tabTextColor">@color/white_60</item>
+        <item name="tabBackground">@drawable/selector_hub_tab</item>
+    </style>
+
+    <style name="FocusableTextInputLayoutStyle">
+        <item name="boxCollapsedPaddingTop">4dp</item>
+        <item name="boxBackgroundColor">@color/white</item>
+        <item name="android:textColorHint">@color/dark_gray</item>
+        <item name="hintTextColor">@color/darker_gray</item>
+    </style>
+
+    <style name="FocusableEditTextStyle" parent="Widget.AppCompat.EditText">
+        <item name="android:imeOptions">actionDone</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:background">@drawable/bg_focusable_edit_text</item>
+        <item name="android:inputType">textCapWords|textNoSuggestions</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:maxLength">50</item>
+        <item name="android:paddingStart">16dp</item>
+        <item name="android:paddingEnd">16dp</item>
+        <item name="android:drawablePadding">-25sp</item>
+    </style>
 </resources>

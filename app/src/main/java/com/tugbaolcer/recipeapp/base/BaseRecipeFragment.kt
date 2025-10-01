@@ -25,6 +25,7 @@ abstract class BaseRecipeFragment<VM : BaseRecipeViewModel, B : ViewDataBinding>
     protected abstract fun init()
 
     abstract fun retrieveData()
+    abstract fun bindingData()
 
     abstract fun initTopBar()
 

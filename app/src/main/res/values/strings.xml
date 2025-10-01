@@ -1,5 +1,28 @@
 <resources>
     <string name="app_name">RecipeApp</string>
+
+    <string name="Button.Label.Register">Üye Ol</string>
+    <string name="Button.Label.Login">Giriş Yap</string>
+
     <string name="Common.Request.ErrorMessage">Bir hatayla karşılaşıldı</string>
+    <string name="Common.Label.Show">Göster</string>
+    <string name="Common.Label.Gone">Gizle</string>
+
+    <string name="Tab.Button.SignIn">giriş Yap</string>
+    <string name="Tab.Button.SignUp">üye Ol</string>
+
     <string name="lorem_ipsum_short">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Faucibus viverra purus quis ornare. Viverra massa enim, auctor est. Vitae nulla lacus dui gravida blandit orci pulvinar pharetra.</string>
+
+    <string name="selected_hub_login_tab"><font color='#ffffffff'>&#8226;</font>giriş yap</string>
+    <string name="selected_hub_register_tab"><font color='#ffffffff'>&#8226;</font>üye ol</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="Label.Email">Email</string>
+    <string name="Label.Password">Şifre</string>
+    <string name="Label.RePassword">Tekrar Şifre</string>
+    <string name="Label.Success">İşlem Başarılı</string>
+    <string name="Label.ErrorMessage.Password">Şifreler uyuşmuyor</string>
+
+
 </resources>

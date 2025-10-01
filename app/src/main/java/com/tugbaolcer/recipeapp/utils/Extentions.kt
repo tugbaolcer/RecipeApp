@@ -1,5 +1,8 @@
 package com.tugbaolcer.recipeapp.utils
 
+import android.os.Bundle
+import android.view.View
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -18,7 +21,7 @@ fun <T> LifecycleCoroutineScope.observeUiState(
         lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
             uiState.collect { state ->
                 when (state) {
-                    is UiState.Loading -> onLoading()
+                    is UiState.Loading -> if (state.showProgress) onLoading()
                     is UiState.Success<T> -> onSuccess(state.data)
                     is UiState.Error -> onError(state.message)
                 }
@@ -26,3 +29,12 @@ fun <T> LifecycleCoroutineScope.observeUiState(
         }
     }
 }
+
+fun View.setOnSingleClickListener(block: () -> Unit) {
+    setOnClickListener(OnSingleClickListener(block))
+}
+
+inline fun <T : Fragment> T.withArgs(argsBuilder: Bundle.() -> Unit): T =
+    this.apply {
+        arguments = Bundle().apply(argsBuilder)
+    }

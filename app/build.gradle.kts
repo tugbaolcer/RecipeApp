@@ -6,7 +6,7 @@ plugins {
     alias(libs.plugins.safeargs)
     id ("kotlin-parcelize")
     id ("com.google.firebase.crashlytics")
-    id ("com.google.gms.google-services")
+    alias(libs.plugins.google.gms.google.services)
 }
 
 var version_name = "1.0.0"
@@ -116,6 +116,8 @@ dependencies {
     implementation(libs.firebase.core)
     implementation(libs.firebase.analytics.ktx)
     implementation(libs.firebase.crashlytics.ktx)
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.auth.ktx)
 
 
     //Security

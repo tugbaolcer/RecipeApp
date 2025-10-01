@@ -8,22 +8,23 @@ import kotlinx.coroutines.launch
 import retrofit2.HttpException
 
 sealed class UiState<out T> {
-    object Loading : UiState<Nothing>()
+    data class Loading(val showProgress: Boolean = true) : UiState<Nothing>()
     data class Success<T>(val data: T) : UiState<T>()
     data class Error(val message: String) : UiState<Nothing>()
 }
 
 open class BaseRecipeViewModel : ViewModel() {
 
-    protected val _uiState = MutableStateFlow<UiState<Any>>(UiState.Loading)
+    protected val _uiState = MutableStateFlow<UiState<Any>>(UiState.Loading(showProgress = false))
     val uiState: StateFlow<UiState<Any>> get() = _uiState
 
     protected fun <T> execute(
+        showLoading: Boolean = false,
         block: suspend () -> T
     ) {
         viewModelScope.launch {
             try {
-                _uiState.value = UiState.Loading
+                _uiState.value = UiState.Loading(showProgress = showLoading)
                 val result = block()
                 _uiState.value = UiState.Success(result as Any)
             } catch (e: HttpException) {
