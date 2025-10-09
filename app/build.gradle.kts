@@ -49,23 +49,17 @@ android {
         create("dev") {
             applicationId = "com.tugbaolcer.recipeapp"
             applicationIdSuffix = ".test"
-            resValue ("string", "app_name", "RecipeApp ${version_name}-test")
-            buildConfigField ("String", "ENDPOINT", "\"https://www.themealdb.com/api/json/v1/1/\"")
+            resValue("string", "app_name", "RecipeApp ${version_name}-test")
+            buildConfigField("String", "ENDPOINT", "\"https://www.themealdb.com/api/json/v1/1/\"")
             versionNameSuffix = "-test"
         }
 
         create("staging") {
             applicationId = "com.tugbaolcer.recipeapp"
             applicationIdSuffix = ".prod"
-            resValue ("string", "app_name", "RecipeApp ${version_name}-prod")
-            buildConfigField ("String", "ENDPOINT", "\"https://www.themealdb.com/api/json/v1/1/\"")
+            resValue("string", "app_name", "RecipeApp ${version_name}-prod")
+            buildConfigField("String", "ENDPOINT", "\"https://www.themealdb.com/api/json/v1/1/\"")
             versionNameSuffix = "-prod"
-        }
-    }
-
-    configurations {
-        all {
-            exclude( group = "androidx.lifecycle", module = "lifecycle-viewmodel-ktx")
         }
     }
 
@@ -82,6 +76,12 @@ android {
     buildFeatures {
         buildConfig = true
         dataBinding = true
+    }
+
+    packagingOptions {
+        resources {
+            excludes += "META-INF/LICENSE.md"
+        }
     }
 }
 
@@ -136,6 +136,15 @@ dependencies {
 
     //Test
     testImplementation(libs.junit)
+    testImplementation(libs.junit.jupiter)
+    testImplementation(libs.mockk)
+    testImplementation(libs.coroutine.test)
+    testImplementation(libs.turbine)
     androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.mockk.android)
+    androidTestImplementation(libs.fragment.testing)
     androidTestImplementation(libs.androidx.espresso.core)
+    androidTestImplementation(libs.hilt.android.testing)
+    kspAndroidTest(libs.hilt.compiler)
+    testImplementation(kotlin("test"))
 }
