@@ -3,7 +3,7 @@ package com.tugbaolcer.recipeapp.di.module
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.tugbaolcer.recipeapp.BuildConfig
-import com.tugbaolcer.recipeapp.data.api.AppApi
+import com.tugbaolcer.recipeapp.data.remote.api.AppApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

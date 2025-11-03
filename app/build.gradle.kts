@@ -78,11 +78,6 @@ android {
         dataBinding = true
     }
 
-    packagingOptions {
-        resources {
-            excludes += "META-INF/LICENSE.md"
-        }
-    }
 }
 
 dependencies {

@@ -1,6 +1,6 @@
 package com.tugbaolcer.recipeapp.data.repository
 
-import com.tugbaolcer.recipeapp.data.api.AppApi
+import com.tugbaolcer.recipeapp.data.remote.api.AppApi
 import com.tugbaolcer.recipeapp.domain.model.Category
 import com.tugbaolcer.recipeapp.domain.repository.RecipeRepository
 import kotlinx.coroutines.flow.Flow
